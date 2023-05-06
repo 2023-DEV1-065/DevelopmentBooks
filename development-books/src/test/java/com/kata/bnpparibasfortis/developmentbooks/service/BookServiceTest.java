@@ -1,12 +1,12 @@
 package com.kata.bnpparibasfortis.developmentbooks.service;
 
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kata.bnpparibasfortis.developmentbooks.exception.InvalidBookInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -182,19 +182,40 @@ class BookServiceTest {
 	@DisplayName("validate getPrice should throw invalid book input exception if invalid book id provided")
 	@Test
 	public void getPriceShouldThrowInvalidBookInputExceptionIfInvalidIdProvided() {
-
+		List<BookOrder> shoppingBasket = new ArrayList<BookOrder>();
+		shoppingBasket.add(new BookOrder(4, 1));
+		shoppingBasket.add(new BookOrder(6, 1));
+		InvalidBookInputException exception = assertThrows(InvalidBookInputException.class, () -> {
+			service.getPrice(shoppingBasket);
+		});
+		String expectedMessage = "Provided book Id is invalid! Please select only from the available book Id's.";
+		Assertions.assertTrue(exception.getMessage().equals(expectedMessage));
 	}
 
 	@DisplayName("validate getPrice should throw invalid book input exception if invalid quantity provided")
 	@Test
 	public void getPriceShouldThrowInvalidBookInputExceptionIfInvalidQuantityIsProvided() {
-
+		List<BookOrder> shoppingBasket = new ArrayList<BookOrder>();
+		shoppingBasket.add(new BookOrder(2, 1));
+		shoppingBasket.add(new BookOrder(3, 0));
+		InvalidBookInputException exception = assertThrows(InvalidBookInputException.class, () -> {
+			service.getPrice(shoppingBasket);
+		});
+		String expectedMessage = "Provided book quantity is Invalid! Please select more than zero.";
+		Assertions.assertTrue(exception.getMessage().equals(expectedMessage));
 	}
 
 	@DisplayName("validate getPrice should throw invalid book input exception if repeated book Ids are provided")
 	@Test
 	public void getPriceShouldThrowInvalidBookInputExceptionIfRepeatedBookIdsAreProvided() {
-
+		List<BookOrder> shoppingBasket = new ArrayList<BookOrder>();
+		shoppingBasket.add(new BookOrder(3, 1));
+		shoppingBasket.add(new BookOrder(3, 2));
+		InvalidBookInputException exception = assertThrows(InvalidBookInputException.class, () -> {
+			service.getPrice(shoppingBasket);
+		});
+		String expectedMessage = "Provided book Ids are invalid! please do not repeat any provided book Id.";
+		Assertions.assertTrue(exception.getMessage().equals(expectedMessage));
 	}
 
 }

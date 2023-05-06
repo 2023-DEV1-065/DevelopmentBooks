@@ -3,9 +3,12 @@ package com.kata.bnpparibasfortis.developmentbooks.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.kata.bnpparibasfortis.developmentbooks.enums.BooksEnumeration;
+import com.kata.bnpparibasfortis.developmentbooks.exception.InvalidBookInputException;
 import com.kata.bnpparibasfortis.developmentbooks.model.BookOrder;
 import com.kata.bnpparibasfortis.developmentbooks.model.Books;
 import com.kata.bnpparibasfortis.developmentbooks.model.PriceSummary;
@@ -15,17 +18,38 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 	private static final double SINGLE_BOOK_PRICE = 50.0;
-	private static final double ONE_HUNDRED = 100;
+	private static final double ONE_HUNDRED = 100.0;
 	public List<Books> getAllBooks() {
 		return Arrays.stream(BooksEnumeration.values()).map(bookEnum -> new Books(bookEnum.getId(), bookEnum.getTitle(),
 				bookEnum.getAuthor(), bookEnum.getYear(), bookEnum.getPrice())).collect(Collectors.toList());
 	}
 
 	public PriceSummary getPrice(List<BookOrder> books) {
+		validateInputs(books);
 		if (books.size() == 1) {
 			return createPriceSummaryWithoutDiscount(books.get(0));
 		} else {
 			return createPriceSummaryWithDiscount(books);
+		}
+	}
+	private void validateInputs(List<BookOrder> books) {
+		List<Integer> availableIds = getAllBooks().stream().map(Books::getId).collect(Collectors.toList());
+		Map<Integer, Long> idCountsMap = books.stream().map(BookOrder::getBookId)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+		books.forEach(book -> {
+			if (book.getQuantity() <= 0) {
+				throw new InvalidBookInputException(
+						"Provided book quantity is Invalid! Please select more than zero.");
+			}
+			if (!availableIds.contains(book.getBookId())) {
+				throw new InvalidBookInputException(
+						"Provided book Id is invalid! Please select only from the available book Id's.");
+			}
+		});
+		if (idCountsMap.keySet().stream().anyMatch(bookId -> idCountsMap.get(bookId) > 1)) {
+			throw new InvalidBookInputException(
+					"Provided book Ids are invalid! please do not repeat any provided book Id.");
 		}
 	}
 	private PriceSummary createPriceSummaryWithoutDiscount(BookOrder booksInput) {
