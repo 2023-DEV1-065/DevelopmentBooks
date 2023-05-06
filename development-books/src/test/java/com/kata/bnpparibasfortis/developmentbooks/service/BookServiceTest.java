@@ -179,5 +179,22 @@ class BookServiceTest {
 		PriceSummary result = service.createPriceSummaryWithDiscount(shoppingBasket);
 		assertEquals(320.0, result.getFinalPrice(), 0.0);
 	}
+	@DisplayName("validate getPrice should throw invalid book input exception if invalid book id provided")
+	@Test
+	public void getPriceShouldThrowInvalidBookInputExceptionIfInvalidIdProvided() {
+
+	}
+
+	@DisplayName("validate getPrice should throw invalid book input exception if invalid quantity provided")
+	@Test
+	public void getPriceShouldThrowInvalidBookInputExceptionIfInvalidQuantityIsProvided() {
+
+	}
+
+	@DisplayName("validate getPrice should throw invalid book input exception if repeated book Ids are provided")
+	@Test
+	public void getPriceShouldThrowInvalidBookInputExceptionIfRepeatedBookIdsAreProvided() {
+
+	}
 
 }
