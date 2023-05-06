@@ -11,11 +11,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.kata.bnpparibasfortis.developmentbooks.model.Books;
+import com.kata.bnpparibasfortis.developmentbooks.model.BookOrder;
+import com.kata.bnpparibasfortis.developmentbooks.model.PriceSummary;
+
 
 class BookServiceTest {
 
 	private static final int NUMBER_AVAILABLE_DIFFERENT_BOOKS = 5;
-
+	private static final double SINGLE_BOOK_PRICE = 50.0;
 	BookService service;
 
 	@BeforeEach
@@ -51,6 +54,16 @@ class BookServiceTest {
 		excpectedBooks.add(new Books(4, "Test-Driven Development By Example", "Kent Beck", 2003, 50.00));
 		excpectedBooks.add(new Books(5, "Working Effectively With Legacy Code", "Michael C. Feathers", 2004, 50.00));
 		return excpectedBooks;
+	}
+
+	@DisplayName("validate getPrice should return the total price of the selected Books")
+	@Test
+	public void getPriceShouldReturnPriceOfBooks() {
+		List<BookOrder> shoppingBasket = new ArrayList<BookOrder>();
+		shoppingBasket.add(new BookOrder(2, 1));
+		PriceSummary result = service.getPrice(shoppingBasket);
+		// No discount if you buy only one book
+		assertEquals(SINGLE_BOOK_PRICE, result.getFinalPrice());
 	}
 
 }
