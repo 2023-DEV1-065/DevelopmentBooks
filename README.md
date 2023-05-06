@@ -58,4 +58,13 @@ mvn clean install -U
 mvn spring-boot:run
 
 You can test the application by using Postman, as shown below :
+getBooks 
+
+![screenshot 6](https://user-images.githubusercontent.com/132676421/236634846-dbe51fb0-1b28-46e0-ad03-8d171fc8a3a0.jpg)
+
+getPrice
+
+![screenshot 7](https://user-images.githubusercontent.com/132676421/236634847-a9d0c2de-8704-4c66-8f0a-5f2bd30e47aa.jpg)
+
+
 
