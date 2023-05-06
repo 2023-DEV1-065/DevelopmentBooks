@@ -9,8 +9,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(InvalidBookInputException.class)
-	public ResponseEntity<String> getException(InvalidBookInputException exception) {
-		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-	}
+    @ExceptionHandler(InvalidBookInputException.class)
+    public ResponseEntity<String> getException(InvalidBookInputException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

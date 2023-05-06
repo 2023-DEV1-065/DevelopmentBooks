@@ -11,12 +11,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PriceSummary {
 
-	private int totalBooks;
+    private int totalBooks;
 
-	private double actualPrice;
+    private double actualPrice;
 
-	private double totalDiscount;
+    private double totalDiscount;
 
-	private double finalPrice;
+    private double finalPrice;
 
 }

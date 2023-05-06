@@ -9,8 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BookOrder {
 
-	private int bookId;
+    private int bookId;
 
-	private int quantity;
+    private int quantity;
 
 }
