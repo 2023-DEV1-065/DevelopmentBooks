@@ -38,7 +38,7 @@ public class BookService {
 		return priceSummary;
 	}
 
-	private PriceSummary createPriceSummaryWithDiscount(List<BookOrder> books) {
+	protected PriceSummary createPriceSummaryWithDiscount(List<BookOrder> books) {
 		int totalBooks = books.stream().mapToInt(BookOrder::getQuantity).sum();
 		List<Integer> bookGroups = new ArrayList<>();
 		double priceOfSimilarBooksLeft = 0;
