@@ -21,7 +21,7 @@ If you go for the whole hog, and buy all 5, you get a huge 25% discount.
 Note that if you buy, say, 4 books, of which 3 are different titles, you get a 10% discount on the 3 that form part of a set, but the 4th book still costs 50 EUR.
 Developers seeking to deliver quality products are queueing up with shopping baskets overflowing with these books. Your mission is to write a piece of code to calculate the price of any conceivable shopping basket.
 
-For example, how much does this basket of books cost?
+### For example, how much does this basket of books cost?
 
 2 copies of the “Clean Code” book
 2 copies of the “Clean Coder” book
@@ -37,4 +37,25 @@ Answer :
 = 160 EUR + 160 EUR
 
 = 320 EUR (knowledge is priceless but has a cost)
+
+### Developement tools
+
+Java Version - 11
+
+Junit version - 5
+
+Spring boot version - 2.7.11
+
+Maven 3.8.1
+
+### How to test the application ? 
+
+Clone that repository
+https://github.com/2023-DEV1-065/DevelopmentBooks
+
+mvn clean install -U
+
+mvn spring-boot:run
+
+You can test the application by using Postman, as shown below :
 
