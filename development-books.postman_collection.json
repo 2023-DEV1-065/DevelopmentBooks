@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "f7f2ef5a-7d89-4d0b-9861-c33ff1286cad",
+		"name": "development-books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getBooks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getBooks",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getBooks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrice",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"bookId\": 3,\r\n        \"quantity\": 2\r\n    },\r\n    {\r\n        \"bookId\": 4,\r\n        \"quantity\": 2\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/getPrice",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getPrice"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
